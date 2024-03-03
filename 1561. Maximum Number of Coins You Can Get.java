@@ -1,3 +1,5 @@
+//BEats 100%
+
 class Solution {
     public int maxCoins(int[] piles) {
         int maxPile = 0;
@@ -17,5 +19,17 @@ class Solution {
         }
         
         return myCoins;
+    }
+}
+
+//Beats 90%
+
+class Solution {
+    public int maxCoins(int[] piles) {
+        Arrays.sort(piles);
+        int sum = 0, n = piles.length;
+        for (int i = n - 2; i >= n / 3; i -= 2)
+            sum += piles[i];
+        return sum;
     }
 }
