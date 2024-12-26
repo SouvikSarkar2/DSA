@@ -21,6 +21,41 @@ class Solution {
 } 
 
 
+// PARTIAL DP (BEATS 50%)
+
+import java.util.HashMap;
+import java.util.Map;
+
+class Solution {
+    public int findTargetSumWays(int[] nums, int target) {
+        Map<String, Integer> dp = new HashMap<>();
+        return backtrack(nums, 0, 0, target, dp);
+    }
+
+    private int backtrack(int[] nums, int i, int curSum, int target, Map<String, Integer> dp) {
+        String key = i + "," + curSum;
+
+        if (dp.containsKey(key)) {
+            return dp.get(key);
+        }
+
+        
+        if (i == nums.length) {
+            return curSum == target ? 1 : 0;
+        }
+
+        
+        int add = backtrack(nums, i + 1, curSum + nums[i], target, dp);
+        int subtract = backtrack(nums, i + 1, curSum - nums[i], target, dp);
+
+        
+        dp.put(key, add + subtract);
+        return dp.get(key);
+    }
+}
+
+
+
 // DP (BEATS 100%)
 
 class Solution {
